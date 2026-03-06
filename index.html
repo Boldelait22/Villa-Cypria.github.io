@@ -11,7 +11,6 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 
     <!-- Aggressively preload the hero — highest priority, WebP first -->
-    <link rel="preload" as="image" href="images/hero.webp" type="image/webp">
     <link rel="preload" as="image" href="images/hero.webp" type="image/jpeg">
     <!-- DNS prefetch for Google Fonts to cut connection time -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -555,7 +554,7 @@
     </header>
 
     <section class="hero">
-        <img class="hero-bg" src="images/hero.webp" alt="" fetchpriority="high" decoding="async">
+        <img class="hero-bg" src="images/hero.webp" alt="" fetchpriority="high" decoding="async" onerror="this.src='images/hero.webp'">
         <div class="hero-content">
             <span class="hero-eyebrow">Biot · Côte d'Azur · France</span>
             <h1>Your French Riviera Escape</h1>
@@ -607,7 +606,7 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('living',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/living room 1.webp" alt="Living room 1" class="active" onclick="openLightbox('living')" style="cursor:zoom-in;">
+                            <img src="images/living room 1.webp" alt="Living room 1" class="active" onclick="openLightbox('living')" style="cursor:zoom-in;">
                             <img data-src="images/living room 2.webp" alt="Living room 2" onclick="openLightbox('living')" style="cursor:zoom-in;">
                             <img data-src="images/living room 3.webp" alt="Living room 3" onclick="openLightbox('living')" style="cursor:zoom-in;">
                             <img data-src="images/living room 4.webp" alt="Living room 4" onclick="openLightbox('living')" style="cursor:zoom-in;">
@@ -634,7 +633,7 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('kitchen',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/kitchen 1.webp" alt="Kitchen 1" class="active" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
+                            <img src="images/kitchen 1.webp" alt="Kitchen 1" class="active" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
                             <img data-src="images/kitchen 2.webp" alt="Kitchen 2" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
                             <img data-src="images/kitchen 3.webp" alt="Kitchen 3" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
                         </div>
@@ -657,7 +656,7 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('master',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/master suite 1.webp" alt="Master suite 1" class="active" onclick="openLightbox('master')" style="cursor:zoom-in;">
+                            <img src="images/master suite 1.webp" alt="Master suite 1" class="active" onclick="openLightbox('master')" style="cursor:zoom-in;">
                             <img data-src="images/master suite 2.webp" alt="Master suite 2" onclick="openLightbox('master')" style="cursor:zoom-in;">
                             <img data-src="images/master suite 3.webp" alt="Master suite 3" onclick="openLightbox('master')" style="cursor:zoom-in;">
                             <img data-src="images/master suite 4.webp" alt="Master suite 4" onclick="openLightbox('master')" style="cursor:zoom-in;">
@@ -684,7 +683,7 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('bedrooms',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/guest bedroom 1.webp" alt="Guest bedroom 1" class="active" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
+                            <img src="images/guest bedroom 1.webp" alt="Guest bedroom 1" class="active" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
                             <img data-src="images/guest bedroom 2.webp" alt="Guest bedroom 2" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
                             <img data-src="images/guest bedroom 3.webp" alt="Guest bedroom 3" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
                         </div>
@@ -707,7 +706,7 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('bathrooms',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/spa bathroom 1.webp" alt="Spa bathroom 1" class="active" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
+                            <img src="images/spa bathroom 1.webp" alt="Spa bathroom 1" class="active" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
                             <img data-src="images/spa bathroom 2.webp" alt="Spa bathroom 2" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
                             <img data-src="images/spa bathroom 3.webp" alt="Spa bathroom 3" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
                         </div>
@@ -730,7 +729,7 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('gym',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/gym 1.webp" alt="Gym 1" class="active" onclick="openLightbox('gym')" style="cursor:zoom-in;">
+                            <img src="images/gym 1.webp" alt="Gym 1" class="active" onclick="openLightbox('gym')" style="cursor:zoom-in;">
                             <img data-src="images/gym 2.webp" alt="Gym 2" onclick="openLightbox('gym')" style="cursor:zoom-in;">
                             <img data-src="images/gym 3.webp" alt="Gym 3" onclick="openLightbox('gym')" style="cursor:zoom-in;">
                         </div>
@@ -753,7 +752,7 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('dependencies',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/dependencies 1.webp" alt="Dependencies 1" class="active" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
+                            <img src="images/dependencies 1.webp" alt="Dependencies 1" class="active" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
                             <img data-src="images/dependencies 2.webp" alt="Dependencies 2" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
                             <img data-src="images/dependencies 3.webp" alt="Dependencies 3" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
                             <img data-src="images/dependencies 4.webp" alt="Dependencies 4" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
@@ -778,7 +777,7 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('biot',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/biot 1.webp" alt="Biot 1" class="active" onclick="openLightbox('biot')" style="cursor:zoom-in;">
+                            <img src="images/biot 1.webp" alt="Biot 1" class="active" onclick="openLightbox('biot')" style="cursor:zoom-in;">
                             <img data-src="images/biot 2.webp" alt="Biot 2" onclick="openLightbox('biot')" style="cursor:zoom-in;">
                             <img data-src="images/biot 3.webp" alt="Biot 3" onclick="openLightbox('biot')" style="cursor:zoom-in;">
                             <img data-src="images/biot 4.webp" alt="Biot 4" onclick="openLightbox('biot')" style="cursor:zoom-in;">
@@ -803,17 +802,15 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('riviera',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/riviera 1.webp" alt="French Riviera 1" class="active" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
+                            <img src="images/riviera 1.webp" alt="French Riviera 1" class="active" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
                             <img data-src="images/riviera 2.webp" alt="French Riviera 2" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
                             <img data-src="images/riviera 3.webp" alt="French Riviera 3" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
-                            <img data-src="images/riviera 4.webp" alt="French Riviera 4" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('riviera',1)">›</button>
                         <div class="slider-controls">
                             <span class="slider-dot active" onclick="goToSlide('riviera',0)"></span>
                             <span class="slider-dot" onclick="goToSlide('riviera',1)"></span>
                             <span class="slider-dot" onclick="goToSlide('riviera',2)"></span>
-                            <span class="slider-dot" onclick="goToSlide('riviera',3)"></span>
                         </div>
                     </div>
                 </div>
@@ -931,7 +928,7 @@
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
-                <a href="mailto:contact@belleconciergerie.com">contact@belleconciergerie.com</a>
+                <a href="/cdn-cgi/l/email-protection#aac9c5c4decbc9deeac8cfc6c6cfc9c5c4c9c3cfd8cdcfd8c3cf84c9c5c7"><span class="__cf_email__" data-cfemail="1d7e7273697c7e695d7f787171787e72737e74786f7a786f7478337e7270">[email&#160;protected]</span></a>
                 <a href="tel:+33098080272">+33 09 80 80 27 21</a>
                 <p>Biot, French Riviera<br>Côte d'Azur, France</p>
             </div>
@@ -957,7 +954,7 @@
         <div class="lightbox-counter" id="lightboxCounter"></div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
     // ─────────────────────────────────────────────────────────────────────────
     // LAZY LOADING
@@ -966,48 +963,43 @@
     // (first visible) image. All other images in that card stay unloaded
     // until the user navigates to them via the slider arrows / dots.
     // ─────────────────────────────────────────────────────────────────────────
-    (function () {
-        var cardObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                var card = entry.target;
-                var activeImg = card.querySelector('.slider-images img.active[data-src]');
-                if (activeImg) {
-                    activeImg.src = activeImg.getAttribute('data-src');
-                    activeImg.removeAttribute('data-src');
-                    activeImg.onload = function () {
-                        var wrap = card.querySelector('.property-image');
-                        if (wrap) wrap.classList.add('loaded');
-                    };
-                } else {
-                    // Image already had a real src (e.g. pool card) — mark immediately
-                    var wrap = card.querySelector('.property-image');
-                    var firstImg = card.querySelector('.slider-images img.active');
-                    if (firstImg && firstImg.complete && wrap) wrap.classList.add('loaded');
-                }
-                cardObserver.unobserve(card);
-            });
-        }, { rootMargin: '300px 0px' });
-
-        document.querySelectorAll('.property-card').forEach(function (c) {
-            cardObserver.observe(c);
-        });
-
-        // Banner background image
-        var banner = document.getElementById('bannerImage');
-        if (banner) {
-            var bannerObs = new IntersectionObserver(function (entries) {
-                if (entries[0].isIntersecting) {
-                    banner.classList.add('loaded');
-                    bannerObs.disconnect();
-                }
-            }, { rootMargin: '400px 0px' });
-            bannerObs.observe(banner);
+    // Load ALL active (first) slide images immediately — no lazy loading for first slides
+    // Only secondary slider images (data-src without .active) stay deferred
+    document.querySelectorAll('.property-card').forEach(function(card) {
+        var activeImg = card.querySelector('.slider-images img.active[data-src]');
+        if (activeImg) {
+            activeImg.src = activeImg.getAttribute('data-src');
+            activeImg.removeAttribute('data-src');
+            activeImg.onload = function() {
+                var wrap = card.querySelector('.property-image');
+                if (wrap) wrap.classList.add('loaded');
+            };
         }
-    })();
+    });
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // Swap data-src → src on demand
+    // Banner background image
+    var banner = document.getElementById('bannerImage');
+    if (banner) {
+        var bannerObs = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+                banner.classList.add('loaded');
+                bannerObs.disconnect();
+            }
+        }, { rootMargin: '400px 0px' });
+        bannerObs.observe(banner);
+    }
+
+    // WebP fallback: if a .webp image fails to load, try the .webp version
+    document.querySelectorAll('img[src$=".webp"], img[data-src$=".webp"]').forEach(function(img) {
+        img.addEventListener('error', function() {
+            if (img.src && img.src.endsWith('.webp')) {
+                img.src = img.src.replace('.webp', '.webp');
+            }
+            if (img.getAttribute('data-src') && img.getAttribute('data-src').endsWith('.webp')) {
+                img.setAttribute('data-src', img.getAttribute('data-src').replace('.webp', '.webp'));
+            }
+        });
+    });
     // ─────────────────────────────────────────────────────────────────────────
     function ensureLoaded(img) {
         if (img && img.getAttribute('data-src')) {
@@ -1111,7 +1103,15 @@
 
     // ─────────────────────────────────────────────────────────────────────────
     // SMOOTH SCROLL
-    // ─────────────────────────────────────────────────────────────────────────
-    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-            if (a.ge
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+            if (a.getAttribute('href') === '#') return;
+            e.preventDefault();
+            var t = document.querySelector(a.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+    </script>
+</body>
+</html>

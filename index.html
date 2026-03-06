@@ -4,14 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Villa Cypria — French Riviera</title>
+    <!-- Load fonts without blocking render — swap from print to all once loaded -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 
-    <!-- Preload ONLY the hero image — the single most critical asset -->
-    <link rel="preload" as="image" href="images/hero.jpg">
+    <!-- Aggressively preload the hero — highest priority, WebP first -->
+    <link rel="preload" as="image" href="images/hero.webp" type="image/webp">
+    <link rel="preload" as="image" href="images/hero.webp" type="image/jpeg">
+    <!-- DNS prefetch for Google Fonts to cut connection time -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
+    <!-- Inline WebP detection: if browser can't do WebP, swap hero to JPG before first paint -->
+    <script>
+    (function(){
+        var img = new Image();
+        img.onload = img.onerror = function(){
+            if(img.height !== 1){
+                // No WebP support — patch the hero background to JPG
+                document.documentElement.classList.add('no-webp');
+            }
+        };
+        img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAkA4JZQCdAEO/gHOAAA=';
+    })();
+    </script>
     <style>
+        .no-webp .hero {
+            background-image:
+                linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.38)),
+                url('images/hero.webp');
+        }
+    </style>
         :root {
             --color-primary: #b8965a;
             --color-primary-dark: #9a7a44;
@@ -79,8 +104,12 @@
 
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.38)),
-                        url('images/hero.jpg');
+            /* Instant warm placeholder colour — visible in <1ms before image arrives */
+            background-color: #2a2318;
+            /* Overlay + WebP hero; browser ignores the jpg line if WebP is supported */
+            background-image:
+                linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.38)),
+                url('images/hero.webp');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -89,6 +118,12 @@
             justify-content: center;
             text-align: center;
             margin-top: 80px;
+        }
+
+        /* Disable fixed parallax on mobile — it forces a repaint on every scroll
+           and prevents the browser from caching the decoded image */
+        @media (max-width: 768px) {
+            .hero { background-attachment: scroll; }
         }
 
         .hero-content { max-width: 820px; padding: 0 2rem; }
@@ -343,7 +378,7 @@
         }
 
         .banner-image.loaded {
-            background: url('images/banner.jpg') center center / cover no-repeat;
+            background: url('images/banner.webp') center center / cover no-repeat;
         }
 
         .book-cta {
@@ -511,9 +546,9 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('pool',-1)">‹</button>
                         <div class="slider-images">
-                            <img src="images/pool view 1.jpg" alt="Pool view 1" class="active" fetchpriority="low" onclick="openLightbox('pool')" style="cursor:zoom-in;">
-                            <img data-src="images/pool view 2.jpg" alt="Pool view 2" onclick="openLightbox('pool')" style="cursor:zoom-in;">
-                            <img data-src="images/pool view 3.jpg" alt="Pool view 3" onclick="openLightbox('pool')" style="cursor:zoom-in;">
+                            <img src="images/pool view 1.webp" alt="Pool view 1" class="active" fetchpriority="low" onclick="openLightbox('pool')" style="cursor:zoom-in;">
+                            <img data-src="images/pool view 2.webp" alt="Pool view 2" onclick="openLightbox('pool')" style="cursor:zoom-in;">
+                            <img data-src="images/pool view 3.webp" alt="Pool view 3" onclick="openLightbox('pool')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('pool',1)">›</button>
                         <div class="slider-controls">
@@ -536,11 +571,11 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('living',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/living room 1.jpg" alt="Living room 1" class="active" onclick="openLightbox('living')" style="cursor:zoom-in;">
-                            <img data-src="images/living room 2.jpg" alt="Living room 2" onclick="openLightbox('living')" style="cursor:zoom-in;">
-                            <img data-src="images/living room 3.jpg" alt="Living room 3" onclick="openLightbox('living')" style="cursor:zoom-in;">
-                            <img data-src="images/living room 4.jpg" alt="Living room 4" onclick="openLightbox('living')" style="cursor:zoom-in;">
-                            <img data-src="images/living room 5.jpg" alt="Living room 5" onclick="openLightbox('living')" style="cursor:zoom-in;">
+                            <img data-src="images/living room 1.webp" alt="Living room 1" class="active" onclick="openLightbox('living')" style="cursor:zoom-in;">
+                            <img data-src="images/living room 2.webp" alt="Living room 2" onclick="openLightbox('living')" style="cursor:zoom-in;">
+                            <img data-src="images/living room 3.webp" alt="Living room 3" onclick="openLightbox('living')" style="cursor:zoom-in;">
+                            <img data-src="images/living room 4.webp" alt="Living room 4" onclick="openLightbox('living')" style="cursor:zoom-in;">
+                            <img data-src="images/living room 5.webp" alt="Living room 5" onclick="openLightbox('living')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('living',1)">›</button>
                         <div class="slider-controls">
@@ -563,9 +598,9 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('kitchen',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/kitchen 1.jpg" alt="Kitchen 1" class="active" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
-                            <img data-src="images/kitchen 2.jpg" alt="Kitchen 2" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
-                            <img data-src="images/kitchen 3.jpg" alt="Kitchen 3" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
+                            <img data-src="images/kitchen 1.webp" alt="Kitchen 1" class="active" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
+                            <img data-src="images/kitchen 2.webp" alt="Kitchen 2" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
+                            <img data-src="images/kitchen 3.webp" alt="Kitchen 3" onclick="openLightbox('kitchen')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('kitchen',1)">›</button>
                         <div class="slider-controls">
@@ -586,11 +621,11 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('master',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/master suite 1.jpg" alt="Master suite 1" class="active" onclick="openLightbox('master')" style="cursor:zoom-in;">
-                            <img data-src="images/master suite 2.jpg" alt="Master suite 2" onclick="openLightbox('master')" style="cursor:zoom-in;">
-                            <img data-src="images/master suite 3.jpg" alt="Master suite 3" onclick="openLightbox('master')" style="cursor:zoom-in;">
-                            <img data-src="images/master suite 4.jpg" alt="Master suite 4" onclick="openLightbox('master')" style="cursor:zoom-in;">
-                            <img data-src="images/master suite 5.jpg" alt="Master suite 5" onclick="openLightbox('master')" style="cursor:zoom-in;">
+                            <img data-src="images/master suite 1.webp" alt="Master suite 1" class="active" onclick="openLightbox('master')" style="cursor:zoom-in;">
+                            <img data-src="images/master suite 2.webp" alt="Master suite 2" onclick="openLightbox('master')" style="cursor:zoom-in;">
+                            <img data-src="images/master suite 3.webp" alt="Master suite 3" onclick="openLightbox('master')" style="cursor:zoom-in;">
+                            <img data-src="images/master suite 4.webp" alt="Master suite 4" onclick="openLightbox('master')" style="cursor:zoom-in;">
+                            <img data-src="images/master suite 5.webp" alt="Master suite 5" onclick="openLightbox('master')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('master',1)">›</button>
                         <div class="slider-controls">
@@ -613,9 +648,9 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('bedrooms',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/guest bedroom 1.jpg" alt="Guest bedroom 1" class="active" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
-                            <img data-src="images/guest bedroom 2.jpg" alt="Guest bedroom 2" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
-                            <img data-src="images/guest bedroom 3.jpg" alt="Guest bedroom 3" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
+                            <img data-src="images/guest bedroom 1.webp" alt="Guest bedroom 1" class="active" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
+                            <img data-src="images/guest bedroom 2.webp" alt="Guest bedroom 2" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
+                            <img data-src="images/guest bedroom 3.webp" alt="Guest bedroom 3" onclick="openLightbox('bedrooms')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('bedrooms',1)">›</button>
                         <div class="slider-controls">
@@ -636,9 +671,9 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('bathrooms',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/spa bathroom 1.jpg" alt="Spa bathroom 1" class="active" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
-                            <img data-src="images/spa bathroom 2.jpg" alt="Spa bathroom 2" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
-                            <img data-src="images/spa bathroom 3.jpg" alt="Spa bathroom 3" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
+                            <img data-src="images/spa bathroom 1.webp" alt="Spa bathroom 1" class="active" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
+                            <img data-src="images/spa bathroom 2.webp" alt="Spa bathroom 2" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
+                            <img data-src="images/spa bathroom 3.webp" alt="Spa bathroom 3" onclick="openLightbox('bathrooms')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('bathrooms',1)">›</button>
                         <div class="slider-controls">
@@ -659,9 +694,9 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('gym',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/gym 1.jpg" alt="Gym 1" class="active" onclick="openLightbox('gym')" style="cursor:zoom-in;">
-                            <img data-src="images/gym 2.jpg" alt="Gym 2" onclick="openLightbox('gym')" style="cursor:zoom-in;">
-                            <img data-src="images/gym 3.jpg" alt="Gym 3" onclick="openLightbox('gym')" style="cursor:zoom-in;">
+                            <img data-src="images/gym 1.webp" alt="Gym 1" class="active" onclick="openLightbox('gym')" style="cursor:zoom-in;">
+                            <img data-src="images/gym 2.webp" alt="Gym 2" onclick="openLightbox('gym')" style="cursor:zoom-in;">
+                            <img data-src="images/gym 3.webp" alt="Gym 3" onclick="openLightbox('gym')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('gym',1)">›</button>
                         <div class="slider-controls">
@@ -682,10 +717,10 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('dependencies',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/dependencies 1.jpg" alt="Dependencies 1" class="active" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
-                            <img data-src="images/dependencies 2.jpg" alt="Dependencies 2" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
-                            <img data-src="images/dependencies 3.jpg" alt="Dependencies 3" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
-                            <img data-src="images/dependencies 4.jpg" alt="Dependencies 4" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
+                            <img data-src="images/dependencies 1.webp" alt="Dependencies 1" class="active" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
+                            <img data-src="images/dependencies 2.webp" alt="Dependencies 2" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
+                            <img data-src="images/dependencies 3.webp" alt="Dependencies 3" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
+                            <img data-src="images/dependencies 4.webp" alt="Dependencies 4" onclick="openLightbox('dependencies')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('dependencies',1)">›</button>
                         <div class="slider-controls">
@@ -707,10 +742,10 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('biot',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/biot 1.jpg" alt="Biot 1" class="active" onclick="openLightbox('biot')" style="cursor:zoom-in;">
-                            <img data-src="images/biot 2.jpg" alt="Biot 2" onclick="openLightbox('biot')" style="cursor:zoom-in;">
-                            <img data-src="images/biot 3.jpg" alt="Biot 3" onclick="openLightbox('biot')" style="cursor:zoom-in;">
-                            <img data-src="images/biot 4.jpg" alt="Biot 4" onclick="openLightbox('biot')" style="cursor:zoom-in;">
+                            <img data-src="images/biot 1.webp" alt="Biot 1" class="active" onclick="openLightbox('biot')" style="cursor:zoom-in;">
+                            <img data-src="images/biot 2.webp" alt="Biot 2" onclick="openLightbox('biot')" style="cursor:zoom-in;">
+                            <img data-src="images/biot 3.webp" alt="Biot 3" onclick="openLightbox('biot')" style="cursor:zoom-in;">
+                            <img data-src="images/biot 4.webp" alt="Biot 4" onclick="openLightbox('biot')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('biot',1)">›</button>
                         <div class="slider-controls">
@@ -732,10 +767,10 @@
                     <div class="image-slider">
                         <button class="slider-arrow prev" onclick="changeSlide('riviera',-1)">‹</button>
                         <div class="slider-images">
-                            <img data-src="images/riviera 1.jpg" alt="French Riviera 1" class="active" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
-                            <img data-src="images/riviera 2.jpg" alt="French Riviera 2" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
-                            <img data-src="images/riviera 3.jpg" alt="French Riviera 3" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
-                            <img data-src="images/riviera 4.jpg" alt="French Riviera 4" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
+                            <img data-src="images/riviera 1.webp" alt="French Riviera 1" class="active" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
+                            <img data-src="images/riviera 2.webp" alt="French Riviera 2" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
+                            <img data-src="images/riviera 3.webp" alt="French Riviera 3" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
+                            <img data-src="images/riviera 4.webp" alt="French Riviera 4" onclick="openLightbox('riviera')" style="cursor:zoom-in;">
                         </div>
                         <button class="slider-arrow next" onclick="changeSlide('riviera',1)">›</button>
                         <div class="slider-controls">

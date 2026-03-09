@@ -118,30 +118,24 @@
             z-index: 0;
         }
 
-        /* Phone: image at top, smooth gradient fade to dark, text at bottom */
+        /* Phone: full cover image, text centered on top */
         @media (max-width: 480px) {
             .hero {
-                background-color: #1a1510;
-                align-items: flex-end;
-                padding-bottom: 3.5rem;
+                background-color: #2a2318;
+                align-items: center;
+                justify-content: center;
             }
 
             .hero-bg {
                 object-fit: cover;
-                object-position: center 20%;
-                height: 60%;
+                object-position: center center;
+                width: 100%;
+                height: 100%;
                 top: 0;
-                bottom: auto;
             }
 
             .hero::after {
-                background: linear-gradient(
-                    to bottom,
-                    rgba(0,0,0,0.1) 0%,
-                    rgba(0,0,0,0.2) 40%,
-                    rgba(20,15,10,0.95) 58%,
-                    rgba(20,15,10,1) 100%
-                );
+                background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.45));
             }
 
             .hero-content h1 { font-size: 2.8rem; }

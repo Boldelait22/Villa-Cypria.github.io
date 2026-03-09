@@ -118,17 +118,33 @@
             z-index: 0;
         }
 
-        /* On narrow phones, contain the full width of the image instead of cropping */
+        /* Phone: image at top, smooth gradient fade to dark, text at bottom */
         @media (max-width: 480px) {
-            .hero-bg {
-                object-fit: contain;
-                object-position: center top;
-                background-color: #2a2318;
-            }
-
             .hero {
                 background-color: #1a1510;
+                align-items: flex-end;
+                padding-bottom: 3.5rem;
             }
+
+            .hero-bg {
+                object-fit: cover;
+                object-position: center 20%;
+                height: 60%;
+                top: 0;
+                bottom: auto;
+            }
+
+            .hero::after {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.1) 0%,
+                    rgba(0,0,0,0.2) 40%,
+                    rgba(20,15,10,0.95) 58%,
+                    rgba(20,15,10,1) 100%
+                );
+            }
+
+            .hero-content h1 { font-size: 2.8rem; }
         }
 
         /* Dark overlay */
@@ -928,7 +944,7 @@
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
-                <a href="mailto:contact@belleconciergerie.com">contact@belleconciergerie.com</a>
+                <a href="/cdn-cgi/l/email-protection#adcec2c3d9ccced9edcfc8c1c1c8cec2c3cec4c8dfcac8dfc4c883cec2c0"><span class="__cf_email__" data-cfemail="2b4844455f4a485f6b494e47474e48444548424e594c4e59424e05484446">[email&#160;protected]</span></a>
                 <a href="tel:+33098080272">+33 09 80 80 27 21</a>
                 <p>Biot, French Riviera<br>Côte d'Azur, France</p>
             </div>
@@ -955,7 +971,7 @@
     </div>
 
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // ─────────────────────────────────────────────────────────────────────────
     // LAZY LOADING
     // Each .property-card is watched by an IntersectionObserver.
@@ -1106,12 +1122,4 @@
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(function(a) {
         a.addEventListener('click', function(e) {
-            if (a.getAttribute('href') === '#') return;
-            e.preventDefault();
-            var t = document.querySelector(a.getAttribute('href'));
-            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
-    </script>
-</body>
-</html>
+            if (a.g
